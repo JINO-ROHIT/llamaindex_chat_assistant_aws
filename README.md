@@ -4,7 +4,7 @@
 
 This project shows how to deploy a llamaindex chat assistant on AWS.
 
-![flow_diagram](assets\flow_digram.png)
+![flow_diagram](assets/flow_digram.png)
 
 
 1. **Create a repository on AWS ECR**
