@@ -4,6 +4,8 @@ import logging
 from llama_index.core.llms import ChatMessage
 from llama_index.llms.bedrock import Bedrock
 
+import os
+
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
@@ -18,9 +20,14 @@ def chat_assistant(user_query : str) -> str:
             ChatMessage(role="user", content = user_query),
         ]
 
-        resp = Bedrock(
-            model="amazon.titan-text-express-v1", profile_name='xxxx'
-        ).chat(messages)
+        llm = Bedrock(
+            model="amazon.titan-text-express-v1",
+            aws_access_key_id = os.getenv('aws_access_key_id'),
+            aws_secret_access_key = os.getenv('aws_secret_access_key'),
+            region_name = os.getenv('region_name')
+        )
+                
+        resp = llm.chat(messages)
 
         return resp.message.content
     
